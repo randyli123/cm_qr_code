@@ -17,18 +17,25 @@
     function makeApiCall() {
       var params = {
         // The ID of the spreadsheet to update.
-        spreadsheetId: 'my-spreadsheet-id',  // TODO: Update placeholder value.
+        spreadsheetId: 'my-1vgZ9egoN_kdmELy1cvrwRaIsVvWZa8YfGUwnHfUnaPY-id',
 
         // The A1 notation of the values to update.
-        range: 'my-range',  // TODO: Update placeholder value.
+        range: 'C2',  
 
         // How the input data should be interpreted.
-        valueInputOption: '',  // TODO: Update placeholder value.
+        valueInputOption: 'RAW',
       };
 
       var valueRangeBody = {
         // TODO: Add desired properties to the request body. All existing properties
         // will be replaced.
+        "values":
+        [
+            [
+                "Test 123"
+            ]
+        ]
+
       };
 
       var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
@@ -41,15 +48,15 @@
     }
 
     function initClient() {
-      var API_KEY = '';  // TODO: Update placeholder with desired API key.
+      var API_KEY = 'AIzaSyAR_3yiE6klhR5Uo69AJYhIvYwGsKMw87c'; 
 
-      var CLIENT_ID = '';  // TODO: Update placeholder with desired client ID.
+      var CLIENT_ID = '687260120100-tbvukp1fcbmpri5q21m68jovl56l01eg.apps.googleusercontent.com';
 
       // TODO: Authorize using one of the following scopes:
       //   'https://www.googleapis.com/auth/drive'
       //   'https://www.googleapis.com/auth/drive.file'
       //   'https://www.googleapis.com/auth/spreadsheets'
-      var SCOPE = '';
+      var SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
 
       gapi.client.init({
         'apiKey': API_KEY,
@@ -85,6 +92,6 @@
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
     <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
-    <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
+    <!-- <button id="signout-button" onclick="handleSignOutClick()">Sign out</button> -->
   </body>
 </html>
