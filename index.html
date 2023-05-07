@@ -1,12 +1,86 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="https://sheetdb.io/handlebars.js">
-        </script>
+        <script src="https://sheetdb.io/handlebars.js"></script>
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f0f0f0;
+                padding: 20px;
+            }
+
+            h1 {
+                text-align: center;
+                font-size: 36px;
+                margin-bottom: 20px;
+            }
+
+            p {
+                margin-bottom: 20px;
+            }
+
+            label {
+                font-weight: bold;
+            }
+
+            input[type="text"] {
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                margin-bottom: 20px;
+                width: 100%;
+            }
+
+            button {
+                background-color: #4CAF50;
+                border: none;
+                color: white;
+                padding: 10px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background-color: #3e8e41;
+            }
+
+            .container {
+                max-width: 500px;
+                margin: 0 auto;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px #ccc;
+            }
+
+            .students {
+                margin-top: 40px;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px #ccc;
+            }
+
+            .student {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+                padding: 10px;
+                background-color: #f0f0f0;
+                border-radius: 5px;
+            }
+        </style>
 
         <script>
-            function myFunction(){
-                fetch('https://sheetdb.io/api/v1/sugc4djzgxdue/first_name/Laura', {
+            function myFunction() {
+                var input_id = document.getElementById("id").value;
+                fetch('https://sheetdb.io/api/v1/sugc4djzgxdue/id/' + input_id, {
                     method: 'PATCH',
                     headers: {
                         'Accept': 'application/json',
@@ -14,25 +88,49 @@
                     },
                     body: JSON.stringify({
                         data: {
-                            'check_in': "True"
+                            'check_in': 'True'
                         }
                     })
                 })
                 .then((response) => response.json())
-                .then((data) => console.log(data));
+                .then((data) => {
+                    location.reload();
+                });
             }
+
+        function handleKeyPress(event) {
+            if (event.keyCode === 13) {
+                myFunction();
+            }
+        }
         </script>
     </head>
+
     <body>
-        <h1>My First Heading</h1>
-        <p>My first paragraph.</p>
-
-        <div>
-        <button onclick="myFunction()" value = "Display"> Click me</button>
+        <div class="container">
+            <h1>FCBCA Children's Ministry Check In Page</h1>
+            <div>
+                <label for="id">Enter ID:</label>
+                <input type="text" id="id" name="id" required minlength="0" maxlength="20" size="10" onkeypress="handleKeyPress(event)" autofocus>
+            </div>
+            
+            <div>
+                <button onclick="myFunction()">Check In</button>
+            </div>
+            <br>
+            <div>
+                <button onclick="window.location.href='class1.html'">Go to Class 1 Page</button>
+            </div>
+            <br>
+            <div>
+                <button onclick="window.location.href='class2.html'">Go to Class 2 Page</button>
+            </div>
         </div>
-        <div data-sheetdb-url="https://sheetdb.io/api/v1/sugc4djzgxdue">
-            <p>{{first_name}}</p>
-        </div>
 
-    </body>
-</html>
+        <div class="students">
+            <h2>All Students</h2>
+        <div data-sheetdb-url="https://sheetdb.io/api/v1/sugc4djzgxdue"
+        data-sheetdb-search="check_in=TRUE">
+            <p>Name: {{first_name}} {{last_name}} / Class: {{class}} Checked In:{{check_in}}</p>
+        </div>
+        </div>
