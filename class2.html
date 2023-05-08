@@ -59,6 +59,25 @@
                 margin: 0;
             }
 
+            /* Darren's changes */
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                table-layout: fixed;
+            }
+            th, td {
+                border: 1px solid black;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #ddd;
+            }
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            /*End of changes*/
+
             .error {
                 color: red;
                 margin-bottom: 20px;
@@ -92,9 +111,25 @@
     <body>
         <button onclick="window.location.href='index.html'">Go back to Home</button>
         <h1>Class 2</h1>
-        
+        <table>
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Class</th>
+                <th>Checked In</th>
+                </tr>
+            </thead>  
+        </table>
         <div data-sheetdb-url="https://sheetdb.io/api/v1/sugc4djzgxdue" data-sheetdb-search="class=2&check_in=TRUE">
-            <p>Name: {{first_name}} {{last_name}} / Checked In:{{check_in}}</p>
+            <table>
+                <tbody>
+                  <tr>
+                    <td>{{first_name}} {{last_name}}</td>
+                    <td>{{class}}</td>
+                    <td>{{check_in}}</td>
+                  </tr>
+                </tbody>
+            </table>
         </div>
         <div>
             <div id="reader"></div>
